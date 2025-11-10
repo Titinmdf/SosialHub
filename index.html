@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialHub - Connect & Share</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <div class="auth-logo-icon">📱</div>
+                <div class="auth-logo-text">SocialHub</div>
+            </div>
+            <h2 class="auth-title">Welcome Back!</h2>
+            <p class="auth-subtitle">Log in to continue to SocialHub</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email or Username</label>
+                    <input type="text" id="loginEmail" class="form-input" placeholder="Enter your email or username" required>
+                    <div id="loginEmailError" class="error-message hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                    <div id="loginPasswordError" class="error-message hidden"></div>
+                </div>
+                
+                <button type="submit" class="auth-button">Log In</button>
+            </form>
+            
+            <div class="auth-link">
+                Don't have an account? <a href="#" id="showRegister">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="auth-container hidden">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <div class="auth-logo-icon">📱</div>
+                <div class="auth-logo-text">SocialHub</div>
+            </div>
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-subtitle">Join SocialHub today!</p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Enter your full name" required>
+                    <div id="registerNameError" class="error-message hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="registerUsername" class="form-input" placeholder="Choose a username" required>
+                    <div id="registerUsernameError" class="error-message hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="Enter your email" required>
+                    <div id="registerEmailError" class="error-message hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Create a password (min 6 characters)" required>
+                    <div id="registerPasswordError" class="error-message hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-input" placeholder="Confirm your password" required>
+                    <div id="registerConfirmError" class="error-message hidden"></div>
+                </div>
+                
+                <button type="submit" class="auth-button">Create Account</button>
+            </form>
+            
+            <div class="auth-link">
+                Already have an account? <a href="#" id="showLogin">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app-container hidden">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <span>📱</span> SocialHub
+            </div>
+            
+            <div class="user-info-sidebar">
+                <div class="user-info-name" id="sidebarUserName">User Name</div>
+                <div class="user-info-handle" id="sidebarUserHandle">@username</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" data-page="home">
+                        <span class="nav-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-page="feeds">
+                        <span class="nav-icon">📰</span>
+                        <span>Feeds</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-page="messages">
+                        <span class="nav-icon">💬</span>
+                        <span>Messages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-page="profile">
+                        <span class="nav-icon">👤</span>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-page="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <button class="create-btn" id="createPostBtn">Create Post</button>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <div id="home-page" class="page">
+                <div class="header">
+                    <h1>Home</h1>
+                </div>
+                <div class="content-area">
+                    <div class="welcome-section">
+                        <h2>Welcome to SocialHub! 🎉</h2>
+                        <p>Connect with friends, share moments, and stay updated with trending topics.</p>
+                    </div>
+                    <div class="trending-section">
+                        <h3 style="margin-bottom: 15px;">Trending Now 🔥</h3>
+                        <div class="trending-item">
+                            <div class="trending-topic">#WebDevelopment</div>
+                            <div class="trending-count">12.5K posts</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-topic">#JavaScript</div>
+                            <div class="trending-count">8.3K posts</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-topic">#Design</div>
+                            <div class="trending-count">6.7K posts</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-topic">#Technology</div>
+                            <div class="trending-count">15.2K posts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feeds Page -->
+            <div id="feeds-page" class="page hidden">
+                <div class="header">
+                    <h1>Feeds</h1>
+                </div>
+                <div class="content-area">
+                    <div class="create-post-form">
+                        <textarea class="create-post-textarea" id="postTextarea" placeholder="What's happening?"></textarea>
+                        <div id="imagePreview" class="image-preview hidden"></div>
+                        <div class="form-actions">
+                            <label class="image-upload-label" for="imageUpload">📷 Add Image</label>
+                            <input type="file" id="imageUpload" class="image-upload" accept="image/*">
+                            <button class="submit-btn" id="submitPost">Post</button>
+                        </div>
+                    </div>
+                    <div id="postsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Messages Page -->
+            <div id="messages-page" class="page hidden">
+                <div class="header">
+                    <h1>Messages</h1>
+                </div>
+                <div class="content-area">
+                    <div class="message-list" id="messagesList"></div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile-page" class="page hidden">
+                <div class="header">
+                    <h1>Profile</h1>
+                </div>
+                <div class="content-area">
+                    <div class="profile-header"></div>
+                    <div class="profile-info">
+                        <div class="profile-avatar" id="profileAvatar">JD</div>
+                        <h2 id="profileName">John Doe</h2>
+                        <p class="post-handle" id="profileHandle">@johndoe</p>
+                        <p style="margin-top: 15px; color: var(--text-secondary);" id="profileBio">
+                            Web developer passionate about creating amazing user experiences. Love coding, coffee, and creativity! ☕💻
+                        </p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-number" id="profilePosts">0</div>
+                                <div class="stat-label">Posts</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">1.2K</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">487</div>
+                                <div class="stat-label">Following</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="userPostsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings-page" class="page hidden">
+                <div class="header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="content-area">
+                    <div class="settings-section">
+                        <div class="settings-title">Appearance</div>
+                        <div class="setting-item">
+                            <div>
+                                <div style="font-weight: 500;">Dark Mode</div>
+                                <div style="color: var(--text-secondary); font-size: 14px;">Toggle dark theme</div>
+                            </div>
+                            <div class="toggle-switch" id="themeToggle">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <div class="settings-title">Notifications</div>
+                        <div class="setting-item">
+                            <div>
+                                <div style="font-weight: 500;">Push Notifications</div>
+                                <div style="color: var(--text-secondary); font-size: 14px;">Receive push notifications</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div>
+                                <div style="font-weight: 500;">Email Notifications</div>
+                                <div style="color: var(--text-secondary); font-size: 14px;">Receive email updates</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <div class="settings-title">Privacy</div>
+                        <div class="setting-item">
+                            <div>
+                                <div style="font-weight: 500;">Private Account</div>
+                                <div style="color: var(--text-secondary); font-size: 14px;">Only followers can see your posts</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+</body>
+</html>
