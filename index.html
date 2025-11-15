@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialHub - Connect & Share</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    <!-- Login Page -->
     <div id="login-page" class="auth-container">
         <div class="auth-box">
             <div class="auth-logo">
@@ -39,7 +39,6 @@
         </div>
     </div>
 
-    <!-- Register Page -->
     <div id="register-page" class="auth-container hidden">
         <div class="auth-box">
             <div class="auth-logo">
@@ -89,9 +88,7 @@
         </div>
     </div>
 
-    <!-- Main App -->
     <div id="app" class="app-container hidden">
-        <!-- Sidebar Navigation -->
         <nav class="sidebar" id="sidebar">
             <div class="logo">
                 <span>📱</span> SocialHub
@@ -138,9 +135,7 @@
             <button class="logout-btn" id="logoutBtn">Logout</button>
         </nav>
 
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Home Page -->
             <div id="home-page" class="page">
                 <div class="header">
                     <h1>Home</h1>
@@ -172,7 +167,6 @@
                 </div>
             </div>
 
-            <!-- Feeds Page -->
             <div id="feeds-page" class="page hidden">
                 <div class="header">
                     <h1>Feeds</h1>
@@ -187,11 +181,59 @@
                             <button class="submit-btn" id="submitPost">Post</button>
                         </div>
                     </div>
-                    <div id="postsContainer"></div>
+                    
+                    <div id="postsContainer">
+                        
+                        <div class="post-card">
+                            <div class="post-header">
+                                <div class="avatar">U</div>
+                                <div class="post-user-info">
+                                    <div class="post-username">Pengguna Saya</div>
+                                    <div class="post-handle">@saya</div>
+                                </div>
+                                <div class="post-time">10m</div>
+                                <button class="delete-btn" style="margin-left: auto;">
+                                    <span class="nav-icon">🗑️</span> Hapus
+                                </button>
+                            </div>
+
+                            <div class="post-content">
+                                Ini adalah postingan pertama saya di Feeds. Coba klik tombol "Hapus" untuk melihat aksinya!
+                            </div>
+
+                            <div class="post-actions">
+                                <button class="action-btn"><span class="nav-icon">💬</span> 5</button>
+                                <button class="action-btn liked"><span class="nav-icon">❤️</span> 12</button>
+                                <button class="action-btn"><span class="nav-icon">🔁</span> 2</button>
+                            </div>
+                        </div>
+                        <div class="post-card">
+                            <div class="post-header">
+                                <div class="avatar">J</div>
+                                <div class="post-user-info">
+                                    <div class="post-username">John Doe</div>
+                                    <div class="post-handle">@johndoe</div>
+                                </div>
+                                <div class="post-time">2h</div>
+                                <button class="delete-btn" style="margin-left: auto;">
+                                    <span class="nav-icon">🗑️</span> Hapus
+                                </button>
+                            </div>
+
+                            <div class="post-content">
+                                Saya suka sekali desain mode gelapnya! Sangat nyaman di mata.
+                            </div>
+
+                            <div class="post-actions">
+                                <button class="action-btn"><span class="nav-icon">💬</span> 20</button>
+                                <button class="action-btn"><span class="nav-icon">❤️</span> 78</button>
+                                <button class="action-btn"><span class="nav-icon">🔁</span> 10</button>
+                            </div>
+                        </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Messages Page -->
             <div id="messages-page" class="page hidden">
                 <div class="header">
                     <h1>Messages</h1>
@@ -201,7 +243,6 @@
                 </div>
             </div>
 
-            <!-- Profile Page -->
             <div id="profile-page" class="page hidden">
                 <div class="header">
                     <h1>Profile</h1>
@@ -234,7 +275,6 @@
                 </div>
             </div>
 
-            <!-- Settings Page -->
             <div id="settings-page" class="page hidden">
                 <div class="header">
                     <h1>Settings</h1>
@@ -289,7 +329,8 @@
             </div>
         </main>
     </div>
-
+    
+    <script src="script.js"></script>
 
 </body>
 </html>

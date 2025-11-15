@@ -340,6 +340,15 @@ function navigateToPage(page) {
 
     // Close mobile menu
     document.getElementById('sidebar').classList.remove('active');
+    
+    // Ensure content is re-rendered if needed
+    if (page === 'feeds') {
+        renderFeeds();
+    } else if (page === 'profile') {
+        renderProfile();
+    } else if (page === 'messages') {
+        renderMessages();
+    }
 }
 
 // Mobile menu toggle
@@ -432,7 +441,7 @@ function createPost(content, image) {
 
 function renderFeeds() {
     const container = document.getElementById('postsContainer');
-    container.innerHTML = '';
+    container.innerHTML = ''; 
 
     // Sort posts by timestamp (newest first)
     const sortedPosts = [...posts].sort((a, b) =>
@@ -443,14 +452,35 @@ function renderFeeds() {
         const postElement = createPostElement(post);
         container.appendChild(postElement);
     });
+
+    // BARU: Panggil fungsi ini untuk mengaktifkan tombol hapus pada postingan yang baru di-render
+    setupDeleteButtonListeners(); 
 }
 
 function createPostElement(post) {
     const user = users.find(u => u.id === post.userId);
     const isLiked = post.likedBy.includes(currentUser.id);
+    
+    // BARU: Tentukan apakah tombol hapus harus ditampilkan (hanya jika postingan milik user yang sedang login)
+    const isCurrentUserPost = post.userId === currentUser.id;
+    let deleteButtonHTML = '';
+
+    if (isCurrentUserPost) {
+        // Data ID postingan disimpan di atribut data-post-id untuk diakses oleh fungsi deletePost
+        deleteButtonHTML = `
+            <button class="delete-btn" style="margin-left: auto;" data-post-id="${post.id}">
+                <span class="nav-icon">🗑️</span> Hapus
+            </button>
+        `;
+    } else {
+        // Elemen placeholder agar layout tidak terlalu berubah
+        deleteButtonHTML = `<div style="margin-left: auto;"></div>`; 
+    }
+
 
     const postCard = document.createElement('div');
     postCard.className = 'post-card';
+    postCard.id = `post-${post.id}`; // Tambahkan ID untuk memudahkan penghapusan visual
 
     const timeAgo = getTimeAgo(post.timestamp);
 
@@ -462,6 +492,7 @@ function createPostElement(post) {
                         <div class="post-handle">@${user.username}</div>
                     </div>
                     <div class="post-time">${timeAgo}</div>
+                    ${deleteButtonHTML}
                 </div>
                 ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
                 ${post.image ? `<img src="${post.image}" class="post-image" alt="Post image">` : ''}
@@ -480,6 +511,63 @@ function createPostElement(post) {
 
     return postCard;
 }
+
+/**
+ * BARU: FUNGSI Menghapus Postingan dari data dan UI
+ */
+function deletePost(postId) {
+    if (!currentUser) return; 
+    
+    const confirmation = confirm("Apakah Anda yakin ingin menghapus postingan ini secara permanen?");
+    if (!confirmation) return;
+
+    // 1. Hapus dari array posts (hanya jika milik user saat ini)
+    const initialLength = posts.length;
+    posts = posts.filter(p => p.id !== postId || p.userId !== currentUser.id);
+
+    if (posts.length < initialLength) {
+        // 2. Simpan perubahan ke localStorage
+        saveData();
+
+        // 3. Update UI
+        const postElement = document.getElementById(`post-${postId}`);
+        if (postElement) {
+            postElement.remove();
+        }
+        
+        // Render ulang feeds dan profile untuk sinkronisasi
+        if (!document.getElementById('feeds-page').classList.contains('hidden')) {
+            renderFeeds();
+        }
+        if (!document.getElementById('profile-page').classList.contains('hidden')) {
+            renderProfile();
+        }
+    } else {
+        alert("Gagal menghapus postingan. Postingan mungkin bukan milik Anda.");
+    }
+}
+
+/**
+ * BARU: FUNGSI Mendaftarkan Listener untuk semua tombol Hapus
+ */
+function setupDeleteButtonListeners() {
+    // Gunakan event delegation untuk tombol hapus
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        // Hapus listener sebelumnya jika ada (untuk menghindari duplikasi saat re-render)
+        button.removeEventListener('click', handleDeleteClick);
+        // Tambahkan listener baru
+        button.addEventListener('click', handleDeleteClick);
+    });
+}
+
+function handleDeleteClick(e) {
+    // Ambil ID postingan dari atribut data
+    const postId = parseInt(e.currentTarget.getAttribute('data-post-id'));
+    if (postId) {
+        deletePost(postId);
+    }
+}
+
 
 function toggleLike(postId) {
     const post = posts.find(p => p.id === postId);
@@ -602,6 +690,9 @@ function renderProfile() {
     if (userPosts.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">No posts yet</p>';
     }
+    
+    // BARU: Panggil listeners untuk tombol hapus di halaman profile
+    setupDeleteButtonListeners(); 
 }
 
 // ========================================

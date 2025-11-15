@@ -230,7 +230,7 @@ body {
 }
 
 .nav-icon {
-    font-size: 24px;
+    font-size: 12px;
 }
 
 .create-btn {
@@ -314,6 +314,8 @@ body {
     align-items: center;
     gap: 10px;
     margin-bottom: 15px;
+    /* Penyesuaian untuk tombol delete di header */
+    padding-right: 5px; 
 }
 
 .avatar {
@@ -393,6 +395,34 @@ body {
 .action-btn.liked:hover {
     background: rgba(224, 36, 94, 0.1);
 }
+
+/* ======================================================= */
+/* ATURAN BARU UNTUK TOMBOL HAPUS (DELETE BUTTON) */
+/* ======================================================= */
+
+.delete-btn {
+    /* Menggunakan warna bahaya/merah dari variabel CSS */
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    font-size: 14px;
+    font-weight: 600; /* Sedikit lebih tebal */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-btn:hover {
+    /* Latar belakang merah muda transparan saat di-hover */
+    background: rgba(224, 36, 94, 0.1); 
+}
+
+/* ======================================================= */
+
 
 .create-post-form {
     background: var(--surface);
